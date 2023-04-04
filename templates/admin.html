@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBM - Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        form{
+            justify-content: center;
+            align-items: center;
+        }
+        input{
+            margin: 1px;
+            width: 100%;
+        }
+        input[type="submit"]{
+            width: 100%;
+            background-color: #a33e3e;
+            color: #fff;
+        }
+        input[type="checkbox"]:checked{
+            background-color: #a33e3e;
+        }
+    </style>
+</head>
+<body>
+    <h1>BookMyMovie-Admin Panel</h1>
+    <h3>Hello Admin</h3>
+    <p>Choose What to do</p>
+    <select id="admin-edit">
+        <option value="add-venue">Add Venue</option>
+        <option value="edit-venue">Edit Venue</option>
+        <option value="delete-venue">Delete Venue</option>
+    </select> <br>
+    
+    <script src="{{ url_for('static',filename='assets/admin.js') }}"></script>
+
+    <div class="container">
+        <form action="/addVenue" method="post" id="add-venue">
+            <h1>Add Venue</h1>
+            Venue Name: <br><input type="text" name="v_name" required> <br>
+            Venue Username: <br><input type="text" name="username" required> <br>
+            Venue Password: <br><input type="text" name="password" required> <br>
+            Venue Address: <br><input type="text" name="place" required> <br>
+            Venue City: <br><input type="text" name="city" required> <br>
+            Venue Rows: <br><input type="number" name="row" required> <br>
+            Venue Columns: <br><input type="number" name="column" required> <br>
+            <input type="submit" value="Add Venue">
+        </form>
+    </div>
+
+    <div class="container">
+        <form action="/editVenue" method="post" id="edit-venue" style="display: none;">
+            <h1>Edit Venue</h1>
+            Venue to edit:<br>
+            <select id="venues-edit" name="venue">
+                {% for venue in venues %}
+                    <option value="{{venue.v_id}}">{{venue.v_name}}, {{venue.place}}</option>
+                {% endfor %}
+            </select> <br>
+            Venue Name: <br><input type="text" name="v_name" required> <br>
+            Venue Username: <br><input type="text" name="username" required> <br>
+            Venue Password: <br><input type="text" name="password" required> <br>
+            Venue Address: <br><input type="text" name="place" required> <br>
+            Venue City: <br><input type="text" name="city" required> <br>
+            Venue Rows: <br><input type="number" name="row" required> <br>
+            Venue Columns: <br><input type="number" name="column" required> <br>
+            <input type="submit" value="Edit">
+        </form>
+    </div>
+
+    <div class="container">
+        <form action="/deleteVenue" method="post" id="delete-venue" style="display: none;">
+            <h1>Delete Venue</h1>
+            Venue to delete:<br>
+            <select id="venues-delete" name="venue">
+                {% for venue in venues %}
+                    <option value="{{venue.v_id}}">{{venue.v_name}}, {{venue.place}}</option>
+                {% endfor %}
+            </select> <br>
+            <input type="submit" value="Delete">
+        </form>
+    </div>
+
+    <script src="{{ url_for('static',filename='assets/homepage.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+
+</html>

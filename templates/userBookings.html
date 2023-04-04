@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BBM Tickets</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <style>
+            body{
+                background-color: #a33e3e;
+            }
+            .text{
+                color: #ffffff;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 class="text">Hello, {{ user.id }} </h1>
+        <p class="text">Go to homepage <a href="{{ url_for('appRoutes.homepage') }}" class="text">Click here</a></p>
+        <p class="text">Your bookings are:</p>
+        <div class="container">
+            <div class="row">
+                {% for b in booked %}
+                <div class="col-md-3">
+                    <div class="card mt-4" style="background-color: #ffffff;">
+                        <div class="card-body">
+                            <p> <b>Show:</b> {{ b.s_name }}</p>
+                            <p> <b>Venue:</b> {{ b.place }}</p>
+                            <p> <b>Date&Time:</b> {{ b.d_t }}</p>   
+                            <p> <b>Seats:</b> {{ b.seats }}</p>
+                            <p> <a href="{{ url_for('appRoutes.downloadBill', booking_id=b.b_id) }}">Download Ticket</a> </p> 
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <script src="{{ url_for('static',filename='assets/homepage.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    </body>
+</html>

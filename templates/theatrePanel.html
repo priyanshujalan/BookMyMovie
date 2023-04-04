@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBM - Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        form{
+            justify-content: center;
+            align-items: center;
+        }
+        input{
+            margin: 1px;
+            width: 100%;
+        }
+        input[type="submit"]{
+            width: 100%;
+            background-color: #a33e3e;
+            color: #fff;
+        }
+        input[type="checkbox"]:checked{
+            background-color: #a33e3e;
+        }
+    </style>
+</head>
+<body>
+    <h1>BookMyMovie-Admin Panel</h1>
+    <h3>Hello {{user.username}} </h3>
+    <p>Choose What to do</p>
+    <select id="admin-edit">
+        <option value="add-show">Add Show</option>
+        <option value="edit-show">Edit Show</option>
+        <option value="delete-show">Delete Show</option>
+    </select> <br>
+    
+    <script src="{{ url_for('static',filename='assets/admin.js') }}"></script>
+
+    <div class="container">
+        <form action="/addShow" method="post" id="add-show" style="display: none;">
+            <h1>Add Show</h1>
+            Show Name: <input type="text" name="name" required> <br>
+            Show Date: <input type="date" name="date" required>
+            Show Time: <input type="time" name="time" required> <br>
+            Show Venue: <br> 
+            <select id="venues-shows-add" name="venue">
+                {% for venue in venues %}
+                    <option value="{{venue.v_id}}">{{venue.v_name}}, {{venue.place}}</option>
+                {% endfor %}
+            </select> <br>
+            Show Rating: <input type="number" name="rating" required> <br>
+            Genre: <input type="text" name="genre" required> <br>
+            <input type="submit" value="Add Show">
+        </form>
+    </div>
+
+    <div class="container">
+        <form action="/editShow" method="post" id="edit-show" style="display: none;">
+            <h1>Edit Show</h1>
+            Show to edit: <br>
+            <select id="all-shows" name="show" required>
+                {% for show in shows %}
+                    <option value="{{show.s_id}}">{{show.s_id}}: {{show.s_name}}</option>
+                {% endfor %}
+            </select> <br>
+            Show Name: <input type="text" name="name" required> <br>
+            Show Date: <input type="date" name="date" required>
+            Show Time: <input type="time" name="time" required> <br>
+            Show Venue: <br>
+            <select id="venues-shows-edit" name="venue" required>
+                {% for venue in venues %}
+                    <option value="{{venue.v_id}}">{{venue.v_name}}, {{venue.place}}</option>
+                {% endfor %}
+            </select> <br>
+            Show Rating: <input type="number" name="rating" required> <br>
+            Genre: <input type="text" name="genre" required> <br>
+            <input type="submit" value="Edit">
+        </form>    
+    </div>
+
+    <div class="container">
+        <form action="/deleteShow" method="post" id="delete-show" style="display: none;">
+            <h1>Delete Show</h1>
+            Show to delete: <br>
+            <select id="all-shows-delete" name="show">
+                {% for show in shows %}
+                    <option value="{{show.s_id}}">{{show.s_id}}: {{show.s_name}}</option>
+                {% endfor %}
+            </select> <br>
+            <input type="submit" value="Delete">
+        </form>
+    </div>
+    <script src="{{ url_for('static',filename='assets/homepage.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+
+</html>
