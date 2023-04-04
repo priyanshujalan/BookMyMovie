@@ -1,5 +1,5 @@
-document.getElementById('admin-edit').addEventListener("change", () => {
-    let ids = ['add-venue', 'edit-venue', 'delete-venue'];
+document.getElementById('theatre-edit').addEventListener("change", () => {
+    let ids = ['add-show', 'edit-show', 'delete-show'];
     let dropDown = document.getElementById('admin-edit');
     for(let i=0;i<6;i++){
         if (dropDown.value == ids[i]){

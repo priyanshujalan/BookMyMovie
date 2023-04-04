@@ -6,7 +6,7 @@ db = SQLAlchemy()
 class venues(db.Model):
     __tablename__ = 'venues'
     __table_args__ = {'extend_existing': True}
-    v_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    username = db.Column(db.String, db.ForeignKey('users.id'), primary_key=True)
     v_name = db.Column(db.String, nullable=False)
     row = db.Column(db.Integer, nullable=False)
     column = db.Column(db.Integer, nullable=False)
@@ -18,7 +18,7 @@ class shows(db.Model):
     __table_args__ = {'extend_existing': True}
     s_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     s_name = db.Column(db.String, nullable=False)
-    s_venue = db.Column(db.Integer, db.ForeignKey('venues.v_id'), nullable=False)
+    s_venue = db.Column(db.String, db.ForeignKey('venues.username'), nullable=False)
     seating = db.Column(db.String, nullable=False)
     date = db.Column(db.String, nullable=False)
     time = db.Column(db.String, nullable=False)

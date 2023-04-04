@@ -34,13 +34,13 @@
     <h1>BookMyMovie-Admin Panel</h1>
     <h3>Hello {{user.username}} </h3>
     <p>Choose What to do</p>
-    <select id="admin-edit">
+    <select id="theatre-edit">
         <option value="add-show">Add Show</option>
         <option value="edit-show">Edit Show</option>
         <option value="delete-show">Delete Show</option>
     </select> <br>
     
-    <script src="{{ url_for('static',filename='assets/admin.js') }}"></script>
+    <script src="{{ url_for('static',filename='assets/theatrePanel.js') }}"></script>
 
     <div class="container">
         <form action="/addShow" method="post" id="add-show" style="display: none;">
